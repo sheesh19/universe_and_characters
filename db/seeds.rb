@@ -1,7 +1,36 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+
+puts "Cleaning database"
+
+Character.destroy_all
+Universe.destroy_all
+
+puts "Creating universes"
+
+Universe.create!(
+    name: 'Wizarding World',
+    banner_url: 'https://wallpapercave.com/wp/bGdF3Go.jpg'
+)
+
+puts "Created #{Universe.count} universe(s)"
+
+puts "Creating characters"
+
+Character.create!(
+    name: 'Harry Potter',
+    photo_url: 'https://static.independent.co.uk/s3fs-public/thumbnails/image/2016/09/29/15/hp.jpg?w968h681',
+    universe: Universe.find_by(name: 'Wizarding World')
+)
+
+Character.create!(
+    name: 'Draco Malfoy',
+    photo_url: 'https://thirdhour.org/wp-content/uploads/2016/08/institutehp2.jpg',
+    universe: Universe.find_by(name: 'Wizarding World')
+)
+
+Character.create!(
+    name: 'Albus Dumbledore',
+    photo_url: 'https://img.cinemablend.com/filter:scale/quill/9/2/9/b/b/6/929bb62f9f38f5059770a54c5988048a848356c9.jpg?fw=1200',
+    universe: Universe.find_by(name: 'Wizarding World')
+)
+
+puts "Created #{Character.count} character(s)"

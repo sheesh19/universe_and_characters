@@ -1,0 +1,25 @@
+<div class="banner h-100" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= @universe.banner_url %>');">
+  <div class="container">
+    <h1 class="pb-5"><%= @universe.name %></h1>
+    <%= link_to 'Back', universes_path, class: 'btn btn-dark' %>
+    <%= link_to 'Edit', edit_universe_path(@universe), class: 'btn btn-primary' %>
+  </div>
+</div>
+
+<div class="cards p-3">
+  <% @universe.characters.each do |character| %>
+    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= character.photo_url %>')">
+      <%= character.name %>
+      <%= link_to "+", character_path(character), method: :delete, data: { confirm: "Are you sure?" }, class: "card-remove-link" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="container p-5 px-5">
+  <%= simple_form_for [@universe, @character] do |f| %>
+    <%= f.input :name %>
+    <%= f.input :photo_url %>
+    <%= f.submit class: 'btn btn-success' %>
+  <% end %>
+</div>
+
